@@ -4,6 +4,8 @@ int main(int argc, char *argv[])
 {
 	d::dump("printing a char", 'a' );	
 
+	d::dump("printing a string", "I am a string");
+
 	char * charPtr = new char('a');
 	d::dump( charPtr );
 	//d::dump("printing a pointer to a char", charPtr );

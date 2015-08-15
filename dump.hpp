@@ -28,11 +28,19 @@ template<typename T,
 void dump( const T& thing,
 		   std::ostream &out = std::cout,
 		   const std::string &terminator = "\n"){
-	//out <<"as "<<typeid(T).name() <<" "<< thing << terminator;
-	out << thing << terminator;
+	out <<"as "<<typeid(T).name() <<" "<< thing << terminator;
+	//out << thing << terminator;
 	out.flush();
 }
 
+void dump( const std::string &thing, std::ostream &out = std::cout ){
+	dump<std::string>( thing, out );
+}
+
+void dump( const char * thing, std::ostream &out = std::cout ){
+	dump( std::string(thing), out );
+}
+	
 template<typename T>
 void dump( const std::pair<T ,T> &thing, std::ostream &out = std::cout ){
 	out << "{ ";
