@@ -7,24 +7,23 @@
 
 namespace d {
 
-template <typename T>
-class has_leftarrowleftarrow
-{
-	typedef char one;
-	typedef long two;
-	
-	template <typename C> static one test( typeof(&C::operator<<) ) ;
-	template <typename C> static two test(...);
-	
-	
-public:
-	enum { value = sizeof(test<T>(0)) == sizeof(char) };
-};
-	
+namespace details{
+    typedef char oddType[7];
+    template<typename T> oddType& operator << ( std::ostream&, const T&);
+
+    template <typename T>
+    struct leftarrowleftarrow{
+    	enum{
+			value = (sizeof(*(T*)(0) == *(T*)(0)) != sizeof(oddType))
+		};
+    };
+
+}//namespace details
+		
 template<typename T,
 	typename std::enable_if<
 	(!std::is_pointer<T>{} &&
-		(has_leftarrowleftarrow<T>::value || std::is_arithmetic<T>{}) )
+		( std::is_arithmetic<T>{} || details::leftarrowleftarrow<T>::value ) )
 			>::type* = nullptr>
 void dump( const T& thing,
 		   std::ostream &out = std::cout,
