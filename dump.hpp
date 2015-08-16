@@ -33,11 +33,11 @@ void dump( const T& thing,
 	out.flush();
 }
 
-void dump( const std::string &thing, std::ostream &out = std::cout ){
+void static inline dump( const std::string &thing, std::ostream &out = std::cout ){
 	dump<std::string>( thing, out );
 }
 
-void dump( const char * thing, std::ostream &out = std::cout ){
+void static inline dump( const char * thing, std::ostream &out = std::cout ){
 	dump( std::string(thing), out );
 }
 	
